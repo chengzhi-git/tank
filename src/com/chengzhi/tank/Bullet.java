@@ -37,7 +37,7 @@ public class Bullet {
             tf.bullets.remove(this);
         }
         switch (dir) {
-            case LEFT:
+            case LEFT1:
                 g.drawImage(ResourceMgr.bulletL, x, y, null);
                 break;
             case RIGHT:
