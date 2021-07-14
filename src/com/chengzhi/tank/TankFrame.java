@@ -13,7 +13,7 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
-    Explode explode = new Explode(100, 100, this);
+    List<Explode> explodes = new ArrayList<>();
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 800;
 
     public TankFrame() throws HeadlessException {
@@ -54,6 +54,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bullets.size(), 10, 60);
         g.drawString("坦克的数量" + tanks.size(), 10, 90);
+        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
         g.setColor(c);
 
         myTank.paint(g);
@@ -66,12 +67,15 @@ public class TankFrame extends Frame {
             bullets.get(i).paint(g);
         }
 
+        for (int i = 0; i < explodes.size(); i++) {
+             explodes.get(i).paint(g);
+
+        }
         for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
-        explode.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
