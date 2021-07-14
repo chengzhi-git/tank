@@ -18,8 +18,9 @@ public class Tank {
     static int WIDTH = ResourceMgr.tankD.getWidth(), HEIGHT = ResourceMgr.tankD.getHeight();
 
     private Random random = new Random();
-    private boolean living  = true;
-    public Tank(int x, int y, Dir dir,Group group, TankFrame tf) {
+    private boolean living = true;
+
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -28,26 +29,26 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if(!living) tf.tanks.remove(this);
-        switch (dir){
+        if (!living) tf.tanks.remove(this);
+        switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(ResourceMgr.tankL, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR,x,y,null);
+                g.drawImage(ResourceMgr.tankR, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU,x,y,null);
+                g.drawImage(ResourceMgr.tankU, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD,x,y,null);
+                g.drawImage(ResourceMgr.tankD, x, y, null);
                 break;
         }
         move();
     }
 
     private void move() {
-       if (!moving) return;
+        if (!moving) return;
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -65,8 +66,8 @@ public class Tank {
                 break;
         }
 
-        if(this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
-        if(this.group == Group.BAD && random.nextInt(100) > 97) randomDir();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 97) randomDir();
     }
 
     private void randomDir() {
@@ -116,7 +117,7 @@ public class Tank {
     public void fire() {
         int bulletX = x + (this.WIDTH - Bullet.WIDTH) / 2;
         int bulletY = y + (this.HEIGHT - Bullet.HEIGHT) / 2;
-        tf.bullets.add(new Bullet(bulletX,bulletY,this.dir,this.group,this.tf));
+        tf.bullets.add(new Bullet(bulletX, bulletY, this.dir, this.group, this.tf));
     }
 
     public void die() {

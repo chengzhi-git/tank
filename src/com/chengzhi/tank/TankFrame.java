@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
@@ -68,7 +68,7 @@ public class TankFrame extends Frame {
         }
 
         for (int i = 0; i < explodes.size(); i++) {
-             explodes.get(i).paint(g);
+            explodes.get(i).paint(g);
 
         }
         for (int i = 0; i < bullets.size(); i++) {

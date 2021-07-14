@@ -6,5 +6,5 @@ package com.chengzhi.tank;
  * @Description
  */
 public enum Group {
-    GOOD,BAD
+    GOOD, BAD
 }

@@ -11,9 +11,10 @@ import java.io.IOException;
  * @Description
  */
 public class ResourceMgr {
-    public static BufferedImage tankL, tankU,tankR,tankD;
-    public static BufferedImage bulletL, bulletU,bulletR,bulletD;
+    public static BufferedImage tankL, tankU, tankR, tankD;
+    public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explodes = new BufferedImage[16];
+
     static {
         try {
             tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
