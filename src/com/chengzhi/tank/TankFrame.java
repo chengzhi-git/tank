@@ -14,7 +14,7 @@ public class TankFrame extends Frame {
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 800;
+    static final int GAME_WIDTH = Integer.parseInt(PropertyManager.get("gameWidth").toString()), GAME_HEIGHT = Integer.parseInt(PropertyManager.get("gameHeight").toString());
 
     public TankFrame() throws HeadlessException {
         setVisible(true);
@@ -33,7 +33,6 @@ public class TankFrame extends Frame {
 
     //解决屏幕闪烁
     Image offScreenImage = null;
-
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
@@ -54,7 +53,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bullets.size(), 10, 60);
         g.drawString("坦克的数量" + tanks.size(), 10, 90);
-        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
+        g.drawString("爆炸的数量" + explodes.size(), 10, 120);
         g.setColor(c);
 
         myTank.paint(g);
