@@ -9,12 +9,12 @@ import java.awt.*;
  */
 public class Bullet {
     private static final int SPEED = Integer.parseInt(PropertyManager.get("bulletSpeed").toString());
-    private int x, y;
-    private Dir dir;
-    static int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
+    public int x, y;
+    public Dir dir;
+    public static int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
     private boolean living = true;
-    private TankFrame tf = null;
-    private Group group = Group.BAD;
+    public TankFrame tf = null;
+    public Group group = Group.BAD;
     Rectangle rectangle = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
@@ -27,6 +27,8 @@ public class Bullet {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+
+        tf.bullets.add(this);
     }
 
     public Group getGroup() {

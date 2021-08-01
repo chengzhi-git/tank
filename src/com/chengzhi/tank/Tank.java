@@ -1,5 +1,9 @@
 package com.chengzhi.tank;
 
+import com.chengzhi.tank.开火策略.DefaultFireStrategy;
+import com.chengzhi.tank.开火策略.FireStrategy;
+import com.chengzhi.tank.开火策略.FourDirFileStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -9,17 +13,17 @@ import java.util.Random;
  * @Description
  */
 public class Tank {
-    private int x, y;
-    private Dir dir = Dir.DOWN;
-    private TankFrame tf = null;
-    private static final int SPEED = Integer.parseInt(PropertyManager.get("tankSpeed").toString());
-    private boolean moving = true;
-    private Group group = Group.BAD;
-    static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
-    private Random random = new Random();
-    private boolean living = true;
-    Rectangle rectangle = new Rectangle();
-
+    public int x, y;
+    public Dir dir = Dir.DOWN;
+    public TankFrame tf = null;
+    public static final int SPEED = Integer.parseInt(PropertyManager.get("tankSpeed").toString());
+    public boolean moving = true;
+    public Group group = Group.BAD;
+    public static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
+    public Random random = new Random();
+    public  boolean living = true;
+    public Rectangle rectangle = new Rectangle();
+    FireStrategy fs;
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
@@ -30,6 +34,30 @@ public class Tank {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+        if(group == Group.GOOD) {
+            String goodFSName = (String)PropertyManager.get("goodFS");
+            try {
+                fs = (FireStrategy)Class.forName(goodFSName).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            String badFSName = (String)PropertyManager.get("badFS");
+            try {
+                fs = (FireStrategy)Class.forName(badFSName).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -71,7 +99,7 @@ public class Tank {
                 break;
         }
 
-        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire(fs);
         if (this.group == Group.BAD && random.nextInt(100) > 97) randomDir();
 
         boundsCheck();
@@ -132,10 +160,8 @@ public class Tank {
         this.moving = moving;
     }
 
-    public void fire() {
-        int bulletX = x + (this.WIDTH - Bullet.WIDTH) / 2;
-        int bulletY = y + (this.HEIGHT - Bullet.HEIGHT) / 2;
-        tf.bullets.add(new Bullet(bulletX, bulletY, this.dir, this.group, this.tf));
+    public void fire(FireStrategy  fireStrategy) {
+        fs.fire(this);
     }
 
     public void die() {

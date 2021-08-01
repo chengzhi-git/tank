@@ -1,5 +1,8 @@
 package com.chengzhi.tank;
 
+import com.chengzhi.tank.开火策略.FireStrategy;
+import com.chengzhi.tank.开火策略.FourDirFileStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,7 +18,7 @@ public class TankFrame extends Frame {
     List<Tank> tanks = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
     static final int GAME_WIDTH = Integer.parseInt(PropertyManager.get("gameWidth").toString()), GAME_HEIGHT = Integer.parseInt(PropertyManager.get("gameHeight").toString());
-
+    FireStrategy fs =new FourDirFileStrategy();
     public TankFrame() throws HeadlessException {
         setVisible(true);
         setTitle("tank war");
@@ -125,7 +128,7 @@ public class TankFrame extends Frame {
                     bU = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(fs);
                 default:
                     break;
             }

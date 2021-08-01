@@ -4,3 +4,6 @@ tankSpeed=3
 bulletSpeed=10
 gameWidth=1080
 gameHeight=720
+#fireStreategy
+goodFS=com.chengzhi.tank.FourDirStrategy
+badFS=com.chengzhi.tank.DefaultFireStrategy
