@@ -1,8 +1,6 @@
 package com.chengzhi.tank;
 
-import com.chengzhi.tank.开火策略.DefaultFireStrategy;
 import com.chengzhi.tank.开火策略.FireStrategy;
-import com.chengzhi.tank.开火策略.FourDirFileStrategy;
 
 import java.awt.*;
 import java.util.Random;
